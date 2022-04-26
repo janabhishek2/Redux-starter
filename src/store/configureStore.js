@@ -1,6 +1,7 @@
 import { createStore } from "redux";
 import { devToolsEnhancer } from "redux-devtools-extension";
-import projectReducer from "./projects";
+import reducer from "./reducer";
+
 export default function () {
-  return createStore(projectReducer, devToolsEnhancer());
+  return createStore(reducer, devToolsEnhancer());
 }

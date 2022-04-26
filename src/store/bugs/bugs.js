@@ -1,13 +1,9 @@
-import { createAction } from "@reduxjs/toolkit";
+import { createSelector } from "reselect";
 
 const BUG_ADDED = "bugAdded";
 const BUG_REMOVED = "bugRemoved";
 const BUG_RESOLVED = "bugResolved";
 const BUG_UNRESOLVED = "bugUnresolved";
-
-const bugResolvedActionCreator = createAction(BUG_RESOLVED);
-const bugResolvedAction = bugResolvedActionCreator({ id: 1 });
-console.log(bugResolvedActionCreator);
 
 export const bugAdded = (description) => {
   return {
@@ -70,3 +66,10 @@ export default function bugsReducer(state = [], action) {
     });
   } else return state;
 }
+
+export const getUnresolvedbugs = createSelector(
+  (state) => state.entities.bugs,
+  (bugs) => {
+    return bugs.filter((bug) => !bug.isResolved);
+  }
+);
