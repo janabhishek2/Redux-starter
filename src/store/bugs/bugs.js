@@ -1,11 +1,13 @@
-// Action Types
+import { createAction } from "@reduxjs/toolkit";
 
 const BUG_ADDED = "bugAdded";
 const BUG_REMOVED = "bugRemoved";
 const BUG_RESOLVED = "bugResolved";
 const BUG_UNRESOLVED = "bugUnresolved";
 
-// actions
+const bugResolvedActionCreator = createAction(BUG_RESOLVED);
+const bugResolvedAction = bugResolvedActionCreator({ id: 1 });
+console.log(bugResolvedActionCreator);
 
 export const bugAdded = (description) => {
   return {
@@ -42,11 +44,8 @@ export const bugUnResolve = (id) => {
   };
 };
 
-// Reducers
-
 let lastId = 0;
-
-export default function reduce(state = [], action) {
+export default function bugsReducer(state = [], action) {
   if (action.type == BUG_ADDED) {
     return [
       ...state,
